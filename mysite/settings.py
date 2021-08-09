@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',  # new
 
     'chat',
+    'notifications',
     # 'djoser',
 
     # Local Apps
@@ -108,6 +109,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
 #############LOCAL DATABASE###########################################
 
 # DATABASES = {
@@ -121,8 +123,17 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     }
 # }
 
-#############CLOUD DATABASE###########################################
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'chatapp',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#     }
+# }
 
+#############CLOUD DATABASE###########################################
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -133,6 +144,7 @@ DATABASES = {
         'PORT': os.getenv('DATABASE_PORT', 5432),
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

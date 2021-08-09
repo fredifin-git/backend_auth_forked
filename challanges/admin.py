@@ -9,4 +9,7 @@ from .models import *
 
 admin.site.register(Challanges)
 admin.site.register(Completed_Challange)
+admin.site.register(DueChallenge)
+admin.site.register(Issue_Challange)
+admin.site.register(Forget_password)
 # Register your models here.

@@ -13,11 +13,10 @@ class TeacherChallangesView(generics.ListCreateAPIView):
 class StudentChallangesView(generics.ListCreateAPIView):
     ordering = ['-created']
     serializer_class = ChallagesSerializer
-    #permission_classes = [IsAuthenticated] #for debug
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        #return Challanges.objects.filter(students__pk=self.request.user.pk)
-        return Challanges.objects#.filter(students__pk=self.request.user.pk)
+        return Challanges.objects.filter(students__pk=self.request.user.pk)
 
 #############for debug#############################################################################
 class ChallangeView(generics.ListCreateAPIView):
@@ -27,16 +26,13 @@ class ChallangeView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Challanges.objects.filter(challanges_id=self.kwargs['challange_id'])
 
-
-
-
 #   Report Api code...
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
 
-@api_view(['GET','POST','PATCH'])
+@api_view(['GET','POST'])
 def get_report(request):
     if request.method == 'GET':
        return Response({"Msg":"Send POST Request for Report"})
@@ -44,6 +40,23 @@ def get_report(request):
     if request.method == 'POST':
         std_id = request.data.get('student_id', None)
         if std_id != None:
+            challenge_id = request.data.get('challenge_id', None)
+            if challenge_id != None:
+                try:
+                    std = CustomUser.objects.get(id=std_id)
+                except CustomUser.DoesNotExist:
+                    return Response({"Msg": "No Student Against this id"})
+                try:
+                    chalenge = Challanges.objects.get(id=challenge_id)
+                except Challanges.DoesNotExist:
+                    return Response({"Msg": "No Challenge Against this id"})
+
+                compl_challenge = Completed_Challange(challenge=chalenge, student=std)
+                compl_challenge.save()
+                res = {
+                    "Msg": "Challenge added updated"
+                }
+                return Response(res)
             try:
                     std = CustomUser.objects.get(id=std_id)
                     try:
@@ -67,8 +80,55 @@ def get_report(request):
             except CustomUser.DoesNotExist:
                 return Response({"Msg": "No Student Against this id"})
         else:
+            return Response({"Msg":"Send POST Request for Report"})\
+
+@api_view(['GET','POST'])
+def forget_password(request):
+    if request.method == 'GET':
+        all_forget = Forget_password.objects.all().order_by('-id')
+        ser = Forget_passwordSerializer(all_forget, many=True)
+        return Response(ser.data)
+
+    if request.method == 'POST':
+        std_id = request.data.get('student_id', None)
+        if std_id != None:
+            try:
+                    std = CustomUser.objects.get(id=std_id)
+                    forget = Forget_password(student=std)
+                    forget.save()
+
+                    return Response({'msg':"Request sent to teacher"})
+            except CustomUser.DoesNotExist:
+                return Response({"Msg": "No Student Against this id"})
+
+
+
+@api_view(['GET','POST'])
+def issue_challenge(request):
+    if request.method == 'GET':
+        issued_challenges= Issue_Challange.objects.all().order_by('-id')
+        ser= Issue_ChallangeSerializer(issued_challenges,many=True)
+        return Response(ser.data)
+
+    if request.method == 'POST':
+        std_id = request.data.get('student_id', None)
+        if std_id != None:
+            challenge_id = request.data.get('challenge_id', None)
+            if challenge_id != None:
+                try:
+                    std = CustomUser.objects.get(id=std_id)
+                except CustomUser.DoesNotExist:
+                    return Response({"Msg": "No Student Against this id"})
+                try:
+                    chalenge = Challanges.objects.get(id=challenge_id)
+                except Challanges.DoesNotExist:
+                    return Response({"Msg": "No Challenge Against this id"})
+
+                issue_challenge = Issue_Challange(challenge=chalenge, student=std)
+                issue_challenge.save()
+                res = {
+                    "Msg": "Challenge isued"
+                }
+                return Response(res)
+        else:
             return Response({"Msg":"Send POST Request for Report"})
-
-
-
-

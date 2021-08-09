@@ -11,3 +11,14 @@ class Completed_ChallangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Completed_Challange
         fields = '__all__'
+
+
+class Issue_ChallangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Issue_Challange
+        fields = '__all__'
+
+class Forget_passwordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Forget_password
+        fields = '__all__'
