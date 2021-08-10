@@ -4,6 +4,7 @@ from .serializers import StudentClassSerializer, StudentClassStudentSerializer
 from .models import StudentClass
 from users.models import CustomUser
 
+
 class StudentClassView(generics.ListCreateAPIView):
     queryset = StudentClass.objects.all()
     ordering = ['-created']

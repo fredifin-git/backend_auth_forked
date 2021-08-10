@@ -7,6 +7,12 @@ class ChallagesSerializer(serializers.ModelSerializer):
         model = Challanges
         fields = ('id', 'Title', 'Social', 'Emotional', 'Study', 'Personal', 'completed', 'students')
 
+
+class StudentChallangesSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = Challanges
+        fields = '__all__'
+
 class Completed_ChallangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Completed_Challange

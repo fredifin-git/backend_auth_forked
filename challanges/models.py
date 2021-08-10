@@ -6,12 +6,13 @@ from django.dispatch import receiver
 from django.db.models.signals import m2m_changed
 import pusher
 from django.utils.timezone import now
+
 pusher_client = pusher.Pusher(
-  app_id='1225636',
-  key='6eec2d039c51e6fbc58b',
-  secret='dac56db940e3d75ecd01',
-  cluster='eu',
-  ssl=True
+    app_id='1225636',
+    key='6eec2d039c51e6fbc58b',
+    secret='dac56db940e3d75ecd01',
+    cluster='eu',
+    ssl=True
 )
 
 
@@ -26,12 +27,15 @@ class Challanges(models.Model):
     Assigned_date = models.DateTimeField(default=datetime.datetime.now(), blank=True)
     last_date = models.DateField(null=True, blank=True)
     students = models.ManyToManyField(CustomUser, related_name="student_challanges")
+
     def __str__(self):
         return self.Title
 
+
 class Completed_Challange(models.Model):
     challenge = models.ForeignKey(Challanges, on_delete=models.CASCADE)
-    student = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
     def __str__(self):
         return str(self.id)
 
@@ -47,21 +51,23 @@ def send_notification(sender, instance, **kwargs):
 
 
 class DueChallenge(models.Model):
-    student = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True,blank=True)
-    msg = models.TextField(default='',null=True,blank=True)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    msg = models.TextField(default='', null=True, blank=True)
 
     def __str__(self):
         return self.msg
 
-class Issue_Challange(models.Model):
-        challenge = models.ForeignKey(Challanges, on_delete=models.CASCADE)
-        student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-        def __str__(self):
-            return str(self.id)
+class Issue_Challange(models.Model):
+    challenge = models.ForeignKey(Challanges, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)
+
 
 class Forget_password(models.Model):
-        student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
-        def __str__(self):
-            return str(self.student)
+    def __str__(self):
+        return str(self.student)
