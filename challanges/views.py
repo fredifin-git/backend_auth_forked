@@ -15,19 +15,20 @@ class StudentChallangesView(generics.ListCreateAPIView):
     ordering = ['-created']
     serializer_class = ChallagesSerializer
 
-    #permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Challanges.objects.all()[:3]
-        #return Challanges.objects.filter(challanges_students__customuser_id=self.kwargs['student_class_id'])
-        #return Challanges.objects.filter(students__pk=self.request.user.pk)
-        #return CustomUser.objects.filter(role="Student", studentprofile__student_class=self.kwargs['student_class_id'])
+        # return Challanges.objects.all()[:3]
+        return Challanges.objects.filter(students=self.kwargs['customuser_id'])  # self.kwargs['customuser_id'])
+        # return Challanges.objects.filter(students__pk=self.request.user.pk)
+        # return CustomUser.objects.filter(role="Student", studentprofile__student_class=self.kwargs['student_class_id'])
+
 
 class StudentRecommenderChallangesView(generics.ListCreateAPIView):
     ordering = ['-created']
     serializer_class = ChallagesSerializer
 
-    #permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Challanges.objects.all()[:3]
@@ -99,8 +100,9 @@ def get_report(request):
         else:
             return Response({"Msg": "Send POST Request for Report"}) \
  \
- \
-@api_view(['GET', 'POST'])
+                   @ api_view(['GET', 'POST'])
+
+
 def forget_password(request):
     if request.method == 'GET':
         all_forget = Forget_password.objects.all().order_by('-id')
