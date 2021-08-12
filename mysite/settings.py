@@ -112,16 +112,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 #############LOCAL DATABASE###########################################
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DATABASE_NAME', 'auth_db'),
-#         'USER': os.getenv('DATABASE_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
-#         'HOST': os.getenv('DATABASE_HOST', 'db'),
-#         'PORT': os.getenv('DATABASE_PORT', 5432),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', 'auth_db'),
+        'USER': os.getenv('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DATABASE_HOST', 'db'),
+        'PORT': os.getenv('DATABASE_PORT', 5432),
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -134,16 +134,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # }
 
 #############CLOUD DATABASE###########################################
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'd39e72b5sqraqa'),
-        'USER': os.getenv('DATABASE_USER', 'hvwcatxqxodwwo'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'edd93b903691ef09d4c3320e12a7f345baf7fbf9049ad36da26a8035a86fb6eb'),
-        'HOST': os.getenv('DATABASE_HOST', 'ec2-54-73-147-133.eu-west-1.compute.amazonaws.com'),
-        'PORT': os.getenv('DATABASE_PORT', 5432),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DATABASE_NAME', 'd39e72b5sqraqa'),
+#         'USER': os.getenv('DATABASE_USER', 'hvwcatxqxodwwo'),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'edd93b903691ef09d4c3320e12a7f345baf7fbf9049ad36da26a8035a86fb6eb'),
+#         'HOST': os.getenv('DATABASE_HOST', 'ec2-54-73-147-133.eu-west-1.compute.amazonaws.com'),
+#         'PORT': os.getenv('DATABASE_PORT', 5432),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
