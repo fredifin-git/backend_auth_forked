@@ -197,7 +197,7 @@ USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://challengeme-frontend-q9n3w.ondigitalocean.app'
+    'https://challengeme-frontend-q9n3w.ondigitalocean.app',
 ]
 
 # Django All Auth config. Add all of this.
