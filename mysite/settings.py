@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'users',  # new
-    'students', #new
+    'students',  # new
     'challanges',
     'classes',
 
@@ -88,7 +88,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join( BASE_DIR, 'templates' ) ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,7 +104,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -196,10 +195,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
-    'https://challengeme-frontend-q9n3w.ondigitalocean.app/'
+    'https://challengeme-frontend-q9n3w.ondigitalocean.app'
 ]
 
 # Django All Auth config. Add all of this.
@@ -232,3 +230,4 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 }
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
